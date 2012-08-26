@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xslt/paths.xsl"?>
+<paths>
+    <p c="i.0.2" u="http://en.wikipedia.org/wiki/{0:}_(number)">Wikipedia's even numbers (cycle over integers, starting from 0, with step 2)</p>
+    <p c="i.2010.1;i.1.1.53" u="http://en.wikipedia.org/wiki/Portal:Astronomy/Picture/Week_{1:2}_{0:}">Wikipedia's Astronomy Portal's picture of the week (limited cycle of weeknumbers (2 digits: ':2}') 1...53 inside another, unlimited cycle of years)</p>
+    <p c="d.20120816.-1" u="http://img.metro.co.uk//i/pix/cartoons/nemi/{0:Y/m/d}.gif">Nemi comix (cycle over dates, scrolled backwards ('.-1'). See <![CDATA[<a href="http://php.net/manual/en/function.date.php">PHP's date()</a>]]> format characters Y,y,m,n,j,d,w)</p>
+</paths>
