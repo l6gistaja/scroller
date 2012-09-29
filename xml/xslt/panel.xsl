@@ -18,14 +18,15 @@
 <input id="currenturl" name="currenturl" type="hidden"/>
 <input id="rowno" name="rowno" type="hidden"/>
 
-<input type="button" value="R" onclick="return panelScroll(0);"/>
-<input type="button" value="&lt;&lt;" onclick="return panelScroll(-1);"/>
-<input id="step" name="step" type="text" size="10"/>
-<input type="button" value="&gt;&gt;" onclick="return panelScroll(1);"/>
+<input type="button" value="R" onclick="return panelScroll(0);" title="Repeat current step"/>
+<input type="button" value="&lt;&lt;" onclick="return panelScroll(-1);" title="Step backwards"/>
+<input id="step" name="step" type="text" size="10" title="Current step"/>
+<input type="button" value="&gt;&gt;" onclick="return panelScroll(1);" title="Step forward"/>
 
-<input type="button" value="?" onclick="return panelInfo();"/>
-<input type="button" value="R" onclick="return panelRepeatPaths();"/>
-<select id="f" name="f" onchange="return panelFileChange();">
+<input type="button" value="?" onclick="return panelInfo();" title="Info about current step"/>
+<input type="button" value="B" onclick="return bench();" title="Workbench for generating new path"/>
+<input type="button" value="R" onclick="return panelRepeatPaths();" title="See paths"/>
+<select id="f" name="f" onchange="return panelFileChange();" title="File/Category">
     <xsl:for-each select="files/f">
     <option><xsl:attribute name="value"><xsl:value-of select="@src"/></xsl:attribute><xsl:value-of select="@src"/></option>
     </xsl:for-each>

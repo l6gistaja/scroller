@@ -55,3 +55,8 @@ function panelCheckIsLoaded() {
     }
     return true;
 }
+
+function bench() {
+    commonChangeContent('../bench.html');
+    return true;
+}

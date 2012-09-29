@@ -141,11 +141,23 @@ function commonNext(cycle, step, url, direction) {
         for(i=0;i<m.length;i++) {
             placeholder = cleanPlaceholder(m[i]);
             placeholderParams = placeholder.split(scrollerConf.delimiterPlaceholder);
+            
             cycleNo = parseInt(placeholderParams[0]);
+            currentValue = cycleObj.levels[cycleNo].currentStep;
+            if(placeholderParams.length > 2) {
+                for(additionalParam = 2; additionalParam<placeholderParams.length; additionalParam++) {
+                    eVal='';
+                    if(placeholderParams[additionalParam].substr(0,5) == "eval ") {
+                        x = currentValue;
+                        eval(placeholderParams[additionalParam].substr(5));
+                        currentValue = eVal;
+                    }
+                }
+            }
             
             // replacing integer
             if(cycleObj.levels[cycleNo].ctype == scrollerConf.typeInt) {
-                filler = '' + cycleObj.levels[cycleNo].currentStep;
+                filler = '' + currentValue;
                 if(placeholderParams[1] != '') {
                     filler = commonLeftPad(filler,parseInt(placeholderParams[1]),'0');
                 }
