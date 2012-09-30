@@ -11,7 +11,10 @@
 <table>
     <tr>
         <th align="left"><input type="button" value="URL" onclick="return refreshBench();" title="Resets form and generates cyclepicker"/>&nbsp;</th>
-        <td><input id="url" name="url" type="text" size="80" value="" title="Paste your URL here and click URL button"/></td>
+        <td>
+            <input id="url" name="url" type="text" size="80" value="" title="Paste your URL here and click URL button"/>
+            <input type="button" value="X" onclick="$('#url').val('');return true;" title="Delete URL"/>
+        </td>
     </tr>
     <tr>
         <td colspan="2"><div id="urlpicker"></div></td>
@@ -33,7 +36,7 @@
     </tr>
     <tr>
         <th align="left" valign="top"><input type="button" value="Comment" onclick="$('#commentdiv').toggle();return true;"/>&nbsp;</th>
-        <td><div id="commentdiv" style="display: none"><textarea id="comment" name="comment" wrap="virtual" rows="3" cols="80"></textarea><div></td>
+        <td><div id="commentdiv" style="display: none"><textarea id="comment" name="comment" wrap="virtual" rows="3" cols="80"></textarea><input type="button" value="X" onclick="$('#comment').val('');return true;" title="Delete comment"/><div></td>
     </tr>
     <tr>
         <th align="left" valign="top"><input type="button" value="XML" onclick="return xmlBench();"/>&nbsp;</th>
