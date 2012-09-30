@@ -46,7 +46,7 @@ function refreshBench() {
     $("#cycle").val('');
     $("#xml").val('');
     $("#template").val('');
-    $("#comment").val('');
+    //$("#comment").val('');
     $("#searchresults").html('');
     $("#urlpicker").html(urlSlices);
     
