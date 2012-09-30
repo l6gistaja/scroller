@@ -61,20 +61,29 @@ function c(i) {
         
         var oldCycle = $("#cycle").val();
         
-        cycleCoordinates[cycleCoordinates.length] = cycleBegin;
-        cycleCoordinates[cycleCoordinates.length] = i;
-        if(cycleCoordinates[cycleCoordinates.length-1] < cycleCoordinates[cycleCoordinates.length-2]) {
-            var temp = cycleCoordinates[cycleCoordinates.length-1];
-            cycleCoordinates[cycleCoordinates.length-1] = cycleCoordinates[cycleCoordinates.length-2];
-            cycleCoordinates[cycleCoordinates.length-2] = temp;
+        cc = {};
+        cc['begin'] = cycleBegin;
+        cc['end'] = i;
+        cc['zeropad'] = $('#zeropad').is(':checked') ?1 :0;
+        
+        if(cc['end'] < cc['begin']) {
+            var temp = cc['begin'];
+            cc['begin'] = cc['end'];
+            cc['end'] = temp;
         }
+        cycleCoordinates[cycleCoordinates.length] = cc;
+        
+        placeholder = url.substring(cycleCoordinates[cycleCoordinates.length-1].begin,
+                cycleCoordinates[cycleCoordinates.length-1].end+1);
         
         cycle = scrollerConf.typeInt
             + scrollerConf.delimiterCycle
-            + url.substring(cycleCoordinates[cycleCoordinates.length-2],
-                cycleCoordinates[cycleCoordinates.length-1]+1)
+            + (cycleCoordinates[cycleCoordinates.length-1].zeropad
+                ? placeholder.replace(/^0+/,'')
+                : placeholder)
             + scrollerConf.delimiterCycle
             + "1";
+        
         $("#cycle").val(
             oldCycle
             + ($.trim(oldCycle) == '' ? '' : scrollerConf.delimiterCycles)
@@ -82,15 +91,18 @@ function c(i) {
             
         var begin = 0;
         var template = '';
-        for(j=0;j<cycleCoordinates.length;j+=2) {
-            template += url.substring(begin,cycleCoordinates[j]);
+        for(j=0;j<cycleCoordinates.length;j++) {
+            template += url.substring(begin,cycleCoordinates[j].begin);
             template += scrollerConf.placeholder0
-                + Math.floor(j/2)
+                + j
                 + scrollerConf.delimiterPlaceholder
+                + (cycleCoordinates[j].zeropad
+                    ? 1 + cycleCoordinates[j].end - cycleCoordinates[j].begin
+                    : '')
                 + scrollerConf.placeholder1;
-            begin = cycleCoordinates[j+1] + 1;
+            begin = cycleCoordinates[j].end + 1;
         }
-        template += url.substring(cycleCoordinates[cycleCoordinates.length-1]+1);
+        template += url.substring(cycleCoordinates[cycleCoordinates.length-1].end+1);
         $("#template").val(template);
         
         cycleSave = false;
@@ -108,6 +120,8 @@ function xmlBench() {
             + '" u="'
             + xmlizeBench($("#template").val())
             + '"'
+            + ($('#earliest').is(':checked') ? ' earliest=""' : '')
+            + ($('#latest').is(':checked') ? ' latest=""' : '')
             + (($.trim($("#comment").val()) == '')
                 ? '/>'
                 : '>'
@@ -178,7 +192,9 @@ function searchBenchAjax(xml) {
     var tableheader = '<tr><th align="left">Cycle</th><th align="left">URL</th></tr>';
     searchresults = 'Template '
         + $("#template").val()
-        + " was found in <a href=\"xml/"
+        + " was <strong>FOUND</strong> "
+        + index
+        + " times in <a href=\"xml/"
         + $("#f").val()
         + '">'
         + $("#f").val()

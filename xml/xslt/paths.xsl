@@ -19,12 +19,12 @@
     <tr>
       <td valign="top" align="right"><a><xsl:attribute name="name">r<xsl:value-of select="position()"/></xsl:attribute><a title="Address of this cycle"><xsl:attribute name="href">#r<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="position()"/></a></a>.</td>
       <td valign="top">
-        <xsl:if test="@earliest">
+        <xsl:if test="@earliest and string-length(@earliest) > 0">
             <input type="button" value="&lt;" title="Earliest known step">
             <xsl:attribute name="onclick">return pCU('<xsl:value-of select="@c"/>','<xsl:value-of select="@u"/>',<xsl:value-of select="position()"/>,'<xsl:value-of select="@earliest"/>');</xsl:attribute>
             </input>&#160;
         </xsl:if>
-        <xsl:if test="@latest">
+        <xsl:if test="@latest and string-length(@latest) > 0">
             <input type="button" value=">" title="Latest known step">
             <xsl:attribute name="onclick">return pCU('<xsl:value-of select="@c"/>','<xsl:value-of select="@u"/>',<xsl:value-of select="position()"/>,'<xsl:value-of select="@latest"/>');</xsl:attribute>
             </input>&#160;
