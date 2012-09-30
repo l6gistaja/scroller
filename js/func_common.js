@@ -215,3 +215,17 @@ function commonPopulate(cycleObj) {
     panelform.elements['currenturl'].value = cycleObj.nextUrl;
     commonChangeContent(cycleObj.nextUrl);
 }
+
+function commonURL2Hash (url) {
+    hashMap = {};
+    searchBegin = url.indexOf('?');
+    if(searchBegin > -1) {
+       search = url.substr(searchBegin + 1);
+       searchA = search.split("&");
+       for(i=0;i<searchA.length;i++) {
+            eq = searchA[i].indexOf('=');
+            hashMap[searchA[i].substr(0,eq)] = decodeURIComponent(searchA[i].substr(eq + 1));
+       }
+    }
+    return hashMap;
+}

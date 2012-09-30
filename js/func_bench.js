@@ -141,16 +141,24 @@ function searchBenchAjax(xml) {
   var searchresults = '';
   var templateA = $("#template").val().split(scrollerConf.placeholder0);
   
+  var index = 0;
   $(xml).find("p").each(function()
   {
     var urltemplate = $(this).attr("u");
     var uta = urltemplate.split(scrollerConf.placeholder0);
     if(uta[0] == templateA[0]) {
-        searchresults = searchresults + '<tr><td>'
+        searchresults = searchresults + '<tr><td><input type="button" onclick="return testSearcResultBench('
+            + index
+            + ');" value="Test"/>&nbsp;<input type="text" id="sr_c_'
+            + index
+            + '" size="10" value="'
             + $(this).attr("c")
-            + '</td><td>'
+            + '"/></td><td id="sr_u_'
+            + index
+            + '">'
             + $(this).attr("u")
             + '</td></tr>';
+        index++;
     }
   });
   
@@ -178,4 +186,23 @@ function searchBenchAjax(xml) {
   }
   
   $("#searchresults").html(searchresults);
+}
+
+function testBench() {
+    return testPageBench($("#cycle").val(), $("#template").val());
+}
+
+function testSearcResultBench(rowno) {
+    return testPageBench($("#sr_c_"+rowno).val(), $("#sr_u_"+rowno).html());
+}
+
+function testPageBench(cycle, url) {
+    if($.trim(cycle) == '' || $.trim(url) == '') {
+        return true;
+    }
+    window.open('index.html?c='
+        + encodeURIComponent(cycle)
+        + '&u='
+        + encodeURIComponent(url));
+    return true;
 }
