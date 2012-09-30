@@ -17,11 +17,15 @@ var cycleCoordinates = [];
 function parseIndex(xml)
 {
   var select = document.getElementById("f");
+  hm = commonURL2Hash(location.href);
   $(xml).find("f").each(function()
   {
     var el = document.createElement("option");
     el.textContent = $(this).attr("src");
     el.value = $(this).attr("src");
+    if("f" in hm && hm['f'] == $(this).attr("src")) {
+        el.selected = true;
+    }
     select.appendChild(el);
   });
 }

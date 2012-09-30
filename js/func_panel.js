@@ -64,6 +64,6 @@ function panelCheckIsLoaded() {
 }
 
 function bench() {
-    commonChangeContent('../bench.html');
+    commonChangeContent('../bench.html?f=' + panelForm().elements['f'].value);
     return true;
 }
