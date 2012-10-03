@@ -6,7 +6,9 @@ function panelInit() {
     hm = commonURL2Hash(window.top.location.href);
     if('u' in hm && hm['u'] != '' && 'c' in hm && hm['c'] != '') {
         panelForm().elements['u'].value = hm['u'];
-        cycleObj = commonNext(hm['c'], null, hm['u'], 0);
+        cycleObj = commonNext(hm['c'], 
+            (('step' in hm && hm['step'] != '') ? hm['step'] : null),
+            hm['u'], 0);
         commonPopulate(cycleObj);
     } else {
         commonChangeContent(panelForm().elements['f'].options[0].text);

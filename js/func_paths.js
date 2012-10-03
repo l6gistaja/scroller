@@ -2,7 +2,7 @@ var webRoot = '../';
 
 function pCU(cycle,url,rowNo,step) {
     if(commonPanelForm().elements['innewwindow'].checked) {
-        commonNewWindow(cycle, url);
+        commonNewWindow(cycle, url, step);
     } else {
         commonPanelForm().elements['u'].value = url;
         commonPanelForm().elements['rowno'].value = rowNo;

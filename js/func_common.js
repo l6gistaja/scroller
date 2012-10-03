@@ -230,13 +230,14 @@ function commonURL2Hash (url) {
     return hashMap;
 }
 
-function commonNewWindow(cycle, url) {
+function commonNewWindow(cycle, url, step) {
     if(cycle == '' || url == '') {
         return true;
     }
     window.open(webRoot 
         + 'index.html?c='
         + encodeURIComponent(cycle)
+        + (step!=null ? '&step=' + step : '')
         + '&u='
         + encodeURIComponent(url));
     return true;

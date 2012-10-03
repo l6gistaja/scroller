@@ -210,9 +210,9 @@ function searchBenchAjax(xml) {
 }
 
 function testBench() {
-    return commonNewWindow($("#cycle").val(), $("#template").val());
+    return commonNewWindow($("#cycle").val(), $("#template").val(),null);
 }
 
 function testSearcResultBench(rowno) {
-    return commonNewWindow($("#sr_c_"+rowno).val(), $("#sr_u_"+rowno).html());
+    return commonNewWindow($("#sr_c_"+rowno).val(), $("#sr_u_"+rowno).html(),null);
 }
