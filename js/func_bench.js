@@ -1,3 +1,4 @@
+var webRoot = '';
 
 $(document).ready(function()
 {
@@ -139,7 +140,7 @@ function xmlizeBench(str) {
 function searchBench() {
 
     if($.trim($("#template").val()) == '') {
-        alert('Generate URL template before searching.');
+        $("#searchresults").html('Generate URL template before searching.');
         return true;
     }
     
@@ -209,20 +210,9 @@ function searchBenchAjax(xml) {
 }
 
 function testBench() {
-    return testPageBench($("#cycle").val(), $("#template").val());
+    return commonNewWindow($("#cycle").val(), $("#template").val());
 }
 
 function testSearcResultBench(rowno) {
-    return testPageBench($("#sr_c_"+rowno).val(), $("#sr_u_"+rowno).html());
-}
-
-function testPageBench(cycle, url) {
-    if($.trim(cycle) == '' || $.trim(url) == '') {
-        return true;
-    }
-    window.open('index.html?c='
-        + encodeURIComponent(cycle)
-        + '&u='
-        + encodeURIComponent(url));
-    return true;
+    return commonNewWindow($("#sr_c_"+rowno).val(), $("#sr_u_"+rowno).html());
 }

@@ -229,3 +229,15 @@ function commonURL2Hash (url) {
     }
     return hashMap;
 }
+
+function commonNewWindow(cycle, url) {
+    if(cycle == '' || url == '') {
+        return true;
+    }
+    window.open(webRoot 
+        + 'index.html?c='
+        + encodeURIComponent(cycle)
+        + '&u='
+        + encodeURIComponent(url));
+    return true;
+}

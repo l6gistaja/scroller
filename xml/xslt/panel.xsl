@@ -31,6 +31,7 @@
     <option><xsl:attribute name="value"><xsl:value-of select="@src"/></xsl:attribute><xsl:value-of select="@src"/></option>
     </xsl:for-each>
 </select>
+<input type="checkbox" id="innewwindow" name="innewwindow" title="Open paths in new window?"/> *
 </form>
 </body>
 </html>

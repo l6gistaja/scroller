@@ -4,6 +4,7 @@ baseurl="../scroller/scroller"
 
 cp index.html ${baseurl}/
 cp bench.html ${baseurl}/
+cp favicon.ico ${baseurl}/
 cp create_ver.bash ${baseurl}/
 cp -r js/ ${baseurl}/
 cp xml/xslt/* ${baseurl}/xml/xslt/
