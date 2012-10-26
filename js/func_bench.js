@@ -1,4 +1,3 @@
-var webRoot = '';
 
 $(document).ready(function()
 {

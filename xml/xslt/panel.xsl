@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>Scroller panel</title>
 <script src="../js/func_common.js"></script>
+<script> webRoot = '../'; </script>
 <script src="../js/func_panel.js"></script>
 </head>
 <body onload="return panelInit();">

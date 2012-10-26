@@ -3,33 +3,67 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>Scroller's video player</title>
 <script src="js/func_common.js"></script>
-</head>
-<body>
+<script src="js/func_panel.js"></script>
+<script>
 
-<table><tr><td valign="top">
+var winSize = {
+  padding: 40,
+  width: window.innerWidth || document.body.clientWidth || 680,
+  height: window.innerHeight || document.body.clientHeight || 440
+}
+winSize.width -= winSize.padding;
+winSize.height -= winSize.padding;
+var hm = commonURL2Hash(location.href);
+
+function playerInit() {
+
+    if(hm['p'] == 'img') {
+        img2fit = document.getElementById('img2fit');
+        winRatio = winSize.width/winSize.height;
+        imgRatio = img2fit.width/img2fit.height;
+        
+        if((1-winRatio)*(1-imgRatio) > 0) { // both have same "landscapeness/portraitness"
+            if(imgRatio > winRatio) {
+                img2fit.width = winSize.width;
+            } else {
+                img2fit.height = winSize.height;
+            }
+        } else { // one is landscape, other portrait
+            if(img2fit.width > img2fit.height) {
+                img2fit.width = winSize.width;
+            } else {
+                img2fit.height = winSize.height;
+            }
+        }
+    }
+    
+    return true;
+}
+
+</script>
+</head>
+<body onload="return playerInit();">
 <script type="text/javascript">
 <!--
 
-var size = {
-  padding: 40,
-  width: window.innerWidth || document.body.clientWidth || 660,
-  height: window.innerHeight || document.body.clientHeight || 420
-}
-size.width -= size.padding;
-size.height -= size.padding;
-
-hm = commonURL2Hash(location.href);
 if('p' in hm && hm['p'].length > 1) {
 
     if(hm['p'] == 'wm') {
         document.writeln('<EMBED SRC="'
             + hm['url']
             + '" WIDTH="'
-            + size.width
+            + winSize.width
             + '" HEIGHT="'
-            + size.height
+            + winSize.height
             + '" AUTOSTART="1" align="left" valign="top" TYPE="application/x-mplayer2" Name="MediaPlayer" SHOWCONTROLS="1" ANIMATIONATSTART="0" AUTOREWIND="0" AUTOSIZE="1" SHOWDISPLAY="1" SHOWSTATUSBAR="1" SendOpenStateChangeEvents="true" TRANSPARENTATSTART="true" PLUGINSPAGE="http://www.microsoft.com/Windows/MediaPlayer/"></EMBED>');
     }
+    
+    if(hm['p'] == 'img') {
+        document.writeln('<a href="#" onclick="panelScroll(1); return false;" title="&gt;&gt;"><img id="img2fit" border="0" src="'
+            + hm['url']
+            + '"/></a>');
+    }
+    
     document.writeln('<br/><a href="'+hm['url']+'">'+hm['url']+'</a>');
 }
 -->
