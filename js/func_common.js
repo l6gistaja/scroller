@@ -15,15 +15,19 @@ function commonPadWithDelimiter(count, valentine, delimiter) {
     return ((count>0) ? delimiter : '') + valentine;
 }
 
-function commonChangeContent(url) {
-    parent.content.location = url;
-}
-
 function commonPanelForm() {
     return parent.panel.document.forms['panelform'];
 }
 
-
+function commonChangeContent(url) {
+    if(url.match(/^[a-z]+:\/\//)) {
+        player = commonPanelForm().elements['p'].options[commonPanelForm().elements['p'].selectedIndex].value;
+        if(player.length > 1) {
+            url = '../player.html?p=' + player + '&url=' + url;
+        }
+    }
+    parent.content.location = url;
+}
 
 function commonCycle(str) {
 
