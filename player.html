@@ -10,6 +10,14 @@
 <script type="text/javascript">
 <!--
 
+var size = {
+  padding: 40,
+  width: window.innerWidth || document.body.clientWidth || 660,
+  height: window.innerHeight || document.body.clientHeight || 420
+}
+size.width -= size.padding;
+size.height -= size.padding;
+
 hm = commonURL2Hash(location.href);
 if('p' in hm && hm['p'].length > 1) {
 
@@ -17,10 +25,10 @@ if('p' in hm && hm['p'].length > 1) {
         document.writeln('<EMBED SRC="'
             + hm['url']
             + '" WIDTH="'
-            + Math.floor(640)
+            + size.width
             + '" HEIGHT="'
-            + Math.floor(400)
-            + '" AUTOSTART="1" align="middle" TYPE="application/x-mplayer2" Name="MediaPlayer" SHOWCONTROLS="1" ANIMATIONATSTART="0" AUTOREWIND="0" AUTOSIZE="1" SHOWDISPLAY="1" SHOWSTATUSBAR="1" SendOpenStateChangeEvents="true" TRANSPARENTATSTART="true" PLUGINSPAGE="http://www.microsoft.com/Windows/MediaPlayer/"></EMBED>');
+            + size.height
+            + '" AUTOSTART="1" align="left" valign="top" TYPE="application/x-mplayer2" Name="MediaPlayer" SHOWCONTROLS="1" ANIMATIONATSTART="0" AUTOREWIND="0" AUTOSIZE="1" SHOWDISPLAY="1" SHOWSTATUSBAR="1" SendOpenStateChangeEvents="true" TRANSPARENTATSTART="true" PLUGINSPAGE="http://www.microsoft.com/Windows/MediaPlayer/"></EMBED>');
     }
     document.writeln('<br/><a href="'+hm['url']+'">'+hm['url']+'</a>');
 }

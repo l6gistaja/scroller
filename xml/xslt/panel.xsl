@@ -33,7 +33,8 @@
 </select>
 <input type="checkbox" id="innewwindow" name="innewwindow" title="Open paths in new window?"/>
 <select id="p" name="p" title="Player for content">
-    <option value="-">none</option>
+    <option value="-">(no player)</option>
+    <option value="img">image fitter</option>
     <option value="wm">Windows Media</option>
 </select>
 </form>

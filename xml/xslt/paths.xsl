@@ -22,11 +22,13 @@
         <xsl:if test="@earliest and string-length(@earliest) > 0">
             <input type="button" value="&lt;" title="Earliest known step">
             <xsl:attribute name="onclick">return pCU('<xsl:value-of select="@c"/>','<xsl:value-of select="@u"/>',<xsl:value-of select="position()"/>,'<xsl:value-of select="@earliest"/>');</xsl:attribute>
+            <xsl:attribute name="title">Earliest known step: <xsl:value-of select="@earliest"/></xsl:attribute>
             </input>&#160;
         </xsl:if>
         <xsl:if test="@latest and string-length(@latest) > 0">
-            <input type="button" value=">" title="Latest known step">
+            <input type="button" value=">">
             <xsl:attribute name="onclick">return pCU('<xsl:value-of select="@c"/>','<xsl:value-of select="@u"/>',<xsl:value-of select="position()"/>,'<xsl:value-of select="@latest"/>');</xsl:attribute>
+            <xsl:attribute name="title">Latest known step: <xsl:value-of select="@latest"/></xsl:attribute>
             </input>&#160;
         </xsl:if>
         <xsl:value-of select="text()" disable-output-escaping="yes"/>
