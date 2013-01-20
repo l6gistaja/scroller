@@ -1,3 +1,14 @@
+function getTagValues(rowID) {
+    var tags = ["u","c"];
+    var y = new Object();
+    for(t in tags) { y[tags[t]] = $("#"+tags[t]+rowID).html(); }
+    return y;
+}
+
+function TpCU(rowNo,step) {
+    var tags = getTagValues(rowNo);
+    return pCU(tags['c'],tags['u'],rowNo,step);
+}
 
 function pCU(cycle,url,rowNo,step) {
     if(commonPanelForm().elements['innewwindow'].checked) {
@@ -9,6 +20,11 @@ function pCU(cycle,url,rowNo,step) {
         commonPopulate(cycleObj);
     }
     return false;
+}
+
+function Tgds(rowNo) {
+    var tags = getTagValues(rowNo);
+    return gds(tags['c'],tags['u']);
 }
 
 function gds(cycle,url) {

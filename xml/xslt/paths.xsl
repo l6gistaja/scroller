@@ -24,29 +24,29 @@
     <tr>
       <td valign="top" align="right"><a><xsl:attribute name="name">r<xsl:value-of select="position()"/></xsl:attribute><a title="Address of this cycle"><xsl:attribute name="href">#r<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="position()"/></a></a>.</td>
       <td valign="top">
-        <input type="button" value="D">
-            <xsl:attribute name="onclick">return gds('<xsl:value-of select="@c"/>','<xsl:value-of select="@u"/>');</xsl:attribute>
-            <xsl:attribute name="title">Generate download script</xsl:attribute>
-        </input>&#160;
+        <a href="#" title="Generate download script" style="text-decoration: none;">
+            <xsl:attribute name="onclick">Tgds(<xsl:value-of select="position()"/>);</xsl:attribute>
+            <span class="ui-icon ui-icon-folder-open" style="display:inline-block;">D</span>
+        </a>&#160;
         <xsl:if test="@earliest and string-length(@earliest) > 0">
-            <input type="button" value="&lt;" title="Earliest known step">
-            <xsl:attribute name="onclick">return pCU('<xsl:value-of select="@c"/>','<xsl:value-of select="@u"/>',<xsl:value-of select="position()"/>,'<xsl:value-of select="@earliest"/>');</xsl:attribute>
-            <xsl:attribute name="title">Earliest known step: <xsl:value-of select="@earliest"/></xsl:attribute>
-            </input>&#160;
+            <a href="#" style="text-decoration: none;">
+                <xsl:attribute name="onclick">return TpCU(<xsl:value-of select="position()"/>,'<xsl:value-of select="@earliest"/>');</xsl:attribute>
+                <xsl:attribute name="title">Earliest known step: <xsl:value-of select="@earliest"/></xsl:attribute>
+                <span class="ui-icon ui-icon-seek-start" style="display:inline-block;">&lt;</span>
+            </a>&#160;
         </xsl:if>
         <xsl:if test="@latest and string-length(@latest) > 0">
-            <input type="button" value=">">
-            <xsl:attribute name="onclick">return pCU('<xsl:value-of select="@c"/>','<xsl:value-of select="@u"/>',<xsl:value-of select="position()"/>,'<xsl:value-of select="@latest"/>');</xsl:attribute>
-            <xsl:attribute name="title">Latest known step: <xsl:value-of select="@latest"/></xsl:attribute>
-            </input>&#160;
+            <a href="#" style="text-decoration: none;">
+                <xsl:attribute name="onclick">return TpCU(<xsl:value-of select="position()"/>,'<xsl:value-of select="@latest"/>');</xsl:attribute>
+                <xsl:attribute name="title">Latest known step: <xsl:value-of select="@latest"/></xsl:attribute>
+                <span class="ui-icon ui-icon-seek-end" style="display:inline-block;">&gt;</span>
+            </a>&#160;
         </xsl:if>
         <xsl:value-of select="text()" disable-output-escaping="yes"/>
       </td>
       <td valign="top">
-        <a href="#" title="Choose this cycle"><xsl:attribute name="onclick">return pCU('<xsl:value-of select="@c"/>','<xsl:value-of select="@u"/>',<xsl:value-of select="position()"/>,null);</xsl:attribute><xsl:value-of select="@c"/></a></td>
-      <td valign="top">
-        <xsl:value-of select="@u"/>
-      </td>
+        <a href="#" title="Choose this cycle"><xsl:attribute name="id">c<xsl:value-of select="position()"/></xsl:attribute><xsl:attribute name="onclick">return TpCU(<xsl:value-of select="position()"/>,null);</xsl:attribute><xsl:value-of select="@c"/></a></td>
+      <td valign="top"><xsl:attribute name="id">u<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="@u"/></td>
     </tr>
     </xsl:for-each>
     <tr>
