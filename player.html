@@ -48,6 +48,8 @@ function playerInit() {
 
 if('p' in hm && hm['p'].length > 1) {
 
+    document.writeln('<a href="'+hm['url']+'">'+hm['url']+'</a><br/>');
+    
     if(hm['p'] == 'wm') {
         document.writeln('<EMBED SRC="'
             + hm['url']
@@ -64,7 +66,6 @@ if('p' in hm && hm['p'].length > 1) {
             + '"/></a>');
     }
     
-    document.writeln('<br/><a href="'+hm['url']+'">'+hm['url']+'</a>');
 }
 -->
 </script>

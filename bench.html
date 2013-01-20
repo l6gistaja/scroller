@@ -5,8 +5,13 @@
 <script src="js/libs/jquery/jquery-1.8.2.min.js"></script>
 <script src="js/func_common.js"></script>
 <script src="js/func_bench.js"></script>
+<script src="js/libs/jquery-ui-1.10.0.custom/js/jquery-ui-1.10.0.custom.min.js"></script>
+<link rel="stylesheet" href="js/libs/jquery-ui-1.10.0.custom/css/smoothness/jquery-ui-1.10.0.custom.min.css" media="all" />
+<script> webRoot = ''; </script>
+<script src="js/func_paths.js"></script>
 </head>
 <body>
+<div id="dialog-modal" title="Generate downloader script" style="display: none;"></div>
 <form name="benchform">
 <table>
     <tr>
@@ -27,7 +32,7 @@
         </td>
     </tr>
     <tr>
-        <th align="left">Cycle:&nbsp;</th>
+        <th align="left"><input type="button" value="Cycle" onclick="return gds(this.form.cycle.value,this.form.template.value);" title="Generate download script"/>&nbsp;</th>
         <td><input id="cycle" name="cycle" type="text" size="80"/></td>
     </tr>
     <tr>
