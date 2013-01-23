@@ -5,6 +5,8 @@
   <html>
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+  <meta http-equiv="Pragma" content="no-cache"></meta>
+  <meta http-equiv="Expires" content="-1"></meta>
   <script src="../js/libs/jquery/jquery-1.8.2.min.js"></script>
   <script src="../js/libs/jquery-ui-1.10.0.custom/js/jquery-ui-1.10.0.custom.min.js"></script>
   <link rel="stylesheet" href="../js/libs/jquery-ui-1.10.0.custom/css/smoothness/jquery-ui-1.10.0.custom.min.css" media="all" />

@@ -59,10 +59,16 @@ function gds(cycle,url) {
         }
         realdata += "\n);";
         
+        downloaderTpl = webRoot + "sdownloader.pl";
         datamarker = "###REAL DATA###";
-        y = $.ajax({ url: webRoot + "sdownloader.pl", async: false }).responseText;
-        cutline = y.indexOf(datamarker);
-        y = y.substr(0,cutline) + realdata  + y.substr(cutline + datamarker.length);
+        y = $.ajax({ url: downloaderTpl, async: false }).responseText;
+        if(typeof(y) == 'string' && y != '') {
+            cutline = y.indexOf(datamarker);
+            y = y.substr(0,cutline) + realdata  + y.substr(cutline + datamarker.length);
+        } else {
+            errors[errors.length] = 'Does downloader template <a target="_blank" href="' + downloaderTpl + '">' + downloaderTpl + '</a> exist?';
+            errors[errors.length] = 'Does your browser allow AJAX calls? (For example, in Opera <a target="_blank" href="opera:config#UserPrefs|AllowFileXMLHttpRequest">opera:config#UserPrefs|AllowFileXMLHttpRequest</a> should be checked.)';
+        }
     }
     
     if(errors.length > 0) {

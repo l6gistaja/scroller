@@ -43,7 +43,7 @@ function panelScroll(direction) {
 }
 
 function panelFileChange() {
-    commonChangeContent(panelForm().elements['f'].options[panelForm().elements['f'].selectedIndex].text + '#end');
+    commonChangeContent(panelForm().elements['f'].options[panelForm().elements['f'].selectedIndex].text + '?random=' + Math.random() + '#end');
     return true;
 }
 
