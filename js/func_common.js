@@ -26,7 +26,7 @@ function commonChangeContent(url) {
             url = webRoot + 'player.html?p=' + player + '&url=' + url;
         }
     }
-    parent.content.location = url;
+    parent.content.location.href = url;
 }
 
 function commonCycle(str) {
