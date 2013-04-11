@@ -5,6 +5,16 @@ function panelForm() {
 
 function panelInit() {
     hm = commonURL2Hash(window.top.location.href);
+	
+	if('p' in hm) {
+		for(i=0;i<panelForm().elements['p'].options.length;i++) {
+			if(panelForm().elements['p'].options[i].value == hm['p']) {
+				panelForm().elements['p'].options.selectedIndex = i;
+				break;
+			}
+		}
+	}
+	
     if('u' in hm && hm['u'] != '' && 'c' in hm && hm['c'] != '') {
         panelForm().elements['u'].value = hm['u'];
         cycleObj = commonNext(hm['c'], 

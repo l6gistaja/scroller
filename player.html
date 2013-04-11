@@ -5,16 +5,16 @@
 <script src="js/func_common.js"></script>
 <script src="js/func_panel.js"></script>
 <script>
+var hm = commonURL2Hash(location.href);
 
 var winSize = {
-  padding: 40,
+  padding: hm['p'] == 'img' ? 10 : 40,
   width: window.innerWidth || document.body.clientWidth || 680,
   height: window.innerHeight || document.body.clientHeight || 440
 }
 
 winSize.width -= winSize.padding;
 winSize.height -= winSize.padding;
-var hm = commonURL2Hash(location.href);
 
 function playerInit() {
 
@@ -22,20 +22,32 @@ function playerInit() {
         img2fit = document.getElementById('img2fit');
         winRatio = winSize.width/winSize.height;
         imgRatio = img2fit.width/img2fit.height;
-        
+		finalWidth = -1;
+        finalHeight = -1;
+		startWidth = img2fit.width;
+		startHeight = img2fit.height;
+		
         if((1-winRatio)*(1-imgRatio) > 0) { // both have same "landscapeness/portraitness"
             if(imgRatio > winRatio) {
-                img2fit.width = winSize.width;
+                finalWidth = img2fit.width = winSize.width;
             } else {
-                img2fit.height = winSize.height;
+                finalHeight = img2fit.height = winSize.height;
             }
         } else { // one is landscape, other portrait
             if(img2fit.width > img2fit.height) {
-                img2fit.width = winSize.width;
+                finalWidth = img2fit.width = winSize.width;
             } else {
-                img2fit.height = winSize.height;
+                finalHeight = img2fit.height = winSize.height;
             }
         }
+		
+		if(finalWidth < 0) { finalWidth = Math.floor((finalHeight/startHeight) * startWidth); }
+		if(finalHeight < 0) { finalHeight = Math.floor((finalWidth/startWidth) * startHeight); }
+		splitV = Math.floor(finalWidth/2);
+		splitH = Math.floor(2*finalHeight/3);
+		document.getElementById('navimap').innerHTML = '<area shape="rect" coords="0,0,'+splitV+','+splitH+'" title="&lt;&lt; Back" href="#" onclick="panelScroll(-1); return false;"/>'
+			+ '<area shape="rect" coords="'+(splitV+1)+',0,'+finalWidth+','+(splitH)+'" title="Forward &gt;&gt;" href="#" onclick="panelScroll(1); return false;"/>'
+			+ '<area shape="rect" coords="0,'+(splitH+1)+','+finalWidth+','+finalHeight+'" title="URL for download" href="'+hm['url']+'"/>';;
     }
     
     return true;
@@ -49,7 +61,7 @@ function playerInit() {
 
 if('p' in hm && hm['p'].length > 1) {
 
-    document.writeln('<a href="'+hm['url']+'">'+hm['url']+'</a><br/>');
+    if(hm['p'] != 'img') { document.writeln('<a href="'+hm['url']+'">'+hm['url']+'</a><br/>'); }
     
     if(hm['p'] == 'wm') {
         document.writeln('<EMBED SRC="'
@@ -62,14 +74,14 @@ if('p' in hm && hm['p'].length > 1) {
     }
     
     if(hm['p'] == 'img') {
-        document.writeln('<a href="#" onclick="panelScroll(1); return false;" title="&gt;&gt;"><img id="img2fit" border="0" src="'
+        document.writeln('<img id="img2fit" border="0" src="'
             + hm['url']
-            + '"/></a>');
+            + '" usemap="#navimap"/>');
     }
     
 }
 -->
 </script>
-
+<map name="navimap" id="navimap"></map>
 </body>
 </html>
