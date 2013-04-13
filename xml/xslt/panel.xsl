@@ -37,6 +37,8 @@
     <option value="-">(no player)</option>
     <option value="img">image fitter</option>
     <option value="wm">Windows Media</option>
+    <option value="h5video">HTML5 video</option>
+    <option value="h5audio">HTML5 audio</option>
 </select>
 </form>
 </body>
