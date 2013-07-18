@@ -46,6 +46,8 @@ function refreshBench() {
     $("#cycle").val('');
     $("#xml").val('');
     $("#template").val('');
+	$("#earliest").val('');
+	$("#latest").val('');
     //$("#comment").val('');
     $("#searchresults").html('');
     $("#urlpicker").html(urlSlices);
@@ -110,6 +112,7 @@ function c(i) {
         cycleBegin = i;
         cycleSave = true;
     }
+	xmlBench();
     return true;
 }
 
@@ -120,8 +123,9 @@ function xmlBench() {
             + '" u="'
             + xmlizeBench($("#template").val())
             + '"'
-            + ($('#earliest').is(':checked') ? ' earliest=""' : '')
-            + ($('#latest').is(':checked') ? ' latest=""' : '')
+            + ($.trim($('#earliest').val()) != '' ? ' earliest="'+$('#earliest').val()+'"' : '')
+			+ ($.trim($('#latest').val()) != '' ? ' latest="'+$('#latest').val()+'"' : '')
+            //+ ($('#latest').is(':checked') ? ' latest=""' : '')
             + (($.trim($("#comment").val()) == '')
                 ? '/>'
                 : '>'

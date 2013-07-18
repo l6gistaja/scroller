@@ -15,33 +15,42 @@
 <form name="benchform">
 <table>
     <tr>
-        <th align="left"><input type="button" value="URL" onclick="return refreshBench();" title="Resets form and generates cyclepicker"/>&nbsp;</th>
+        <th align="left"><input type="button" value="URL" onclick="return refreshBench();" title="Resets form and generates cyclepicker"/>
+		&nbsp;</th>
         <td>
-            <input id="url" name="url" type="text" size="80" value="" title="Paste your URL here and click URL button"/>
-            <input type="button" value="X" onclick="$('#url').val('');return true;" title="Delete URL"/>
+			<input type="button" value="X" onclick="$('#url').val('');return true;" title="Delete URL"/>
+            <input id="url" name="url" type="text" size="80" value="" title="Paste your URL here and click URL button" onchange="return refreshBench();"/>
         </td>
     </tr>
     <tr>
         <td colspan="2"><div id="urlpicker"></div></td>
     </tr>
     <tr>
-        <td colspan="2">
-            <input id="zeropad" name="zeropad" type="checkbox" checked="checked" title="Is placeholder what you choose next zeropadded integer?"/> zeropadded 
-            <input id="earliest" name="earliest" type="checkbox" title="Add earliest step stub?"/> earliest  
-            <input id="latest" name="latest" type="checkbox" title="Add latest step stub?"/> latest
+		<th align="left">&nbsp;</th>
+        <td>
+            earliest&nbsp;<input type="button" value="X" onclick="$('#earliest').val('');return xmlBench();" title="Delete earliest step"/>
+			<input id="earliest" name="earliest" type="text" value="" onchange="return xmlBench();"/>
+			
+            &nbsp;latest&nbsp;<input type="button" value="X" onclick="$('#latest').val('');return xmlBench();" title="Delete latest step"/>
+			<input id="latest" name="latest" type="text" value="" onchange="return xmlBench();"/>
+			
+			&nbsp;<input id="zeropad" name="zeropad" type="checkbox" checked="checked" title="Is placeholder what you choose next zeropadded integer?"/> zeropadded
         </td>
     </tr>
     <tr>
         <th align="left"><input type="button" value="Cycle" onclick="return gds(this.form.cycle.value,this.form.template.value);" title="Generate download script"/>&nbsp;</th>
-        <td><input id="cycle" name="cycle" type="text" size="80"/></td>
+        <td><input id="cycle" name="cycle" type="text" size="80" onchange="return xmlBench();"/></td>
     </tr>
     <tr>
         <th align="left"><input type="button" value="URL template" onclick="return testBench();" title="Test template"/>&nbsp;</th>
-        <td><input id="template" name="template" type="text" size="80"/></td>
+        <td><input id="template" name="template" type="text" size="80" onchange="return xmlBench();"/></td>
     </tr>
     <tr>
-        <th align="left" valign="top"><input type="button" value="Comment" onclick="$('#commentdiv').toggle();return true;"/>&nbsp;</th>
-        <td><div id="commentdiv" style="display: none"><textarea id="comment" name="comment" wrap="virtual" rows="3" cols="80"></textarea><input type="button" value="X" onclick="$('#comment').val('');return true;" title="Delete comment"/><div></td>
+        <th align="left" valign="top">Comment&nbsp;</th>
+        <td valign="top">
+			<input type="button" value="X" onclick="$('#comment').val('');return xmlBench();" title="Delete comment"/>
+			<input id="comment" name="comment" type="text" size="80" value="" onchange="return xmlBench();"/>
+		</td>
     </tr>
     <tr>
         <th align="left" valign="top"><input type="button" value="XML" onclick="return xmlBench();"/>&nbsp;</th>
