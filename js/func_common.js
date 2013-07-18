@@ -242,6 +242,7 @@ function commonNewWindow(cycle, url, step) {
         + 'index.html?c='
         + encodeURIComponent(cycle)
         + (step!=null ? '&step=' + step : '')
+		+ '&p=' + commonPanelForm().elements['p'].options[commonPanelForm().elements['p'].selectedIndex].value
         + '&u='
         + encodeURIComponent(url));
     return true;
