@@ -6,6 +6,7 @@ $file_prefix = "";
 $fileextension = "";
 $placeholder_delimiter = "_";
 $dry_run = 0;
+$allowed_fails = 10;
 
 # cycle data
 ###REAL DATA###
@@ -17,15 +18,18 @@ if(!$dry_run && $download_dir ne '' && !(-e $download_dir)) {
 $url =~ s/:\}/:1\}/g;
 @matches = $url =~ /(\{\d+:\d+\})/g;
 for($j= $#levels; $j > -1; $j--) {
-    $placeholderstr = ''.$levels[$j]->{cbegin};
-    $levels[$j]->{placeholderlength} = length($placeholderstr);
-    if(exists $levels[$j]->{cend}) {
-        $placeholderstr = ''.$levels[$j]->{cend};
+    if(!exists $levels[$j]->{placeholderlength}) {
+        $placeholderstr = ''.$levels[$j]->{cbegin};
         $levels[$j]->{placeholderlength} = length($placeholderstr);
+        if(exists $levels[$j]->{cend}) {
+            $placeholderstr = ''.$levels[$j]->{cend};
+            $levels[$j]->{placeholderlength} = length($placeholderstr);
+        }
     }
 }
 #use Data::Dumper; print Dumper(@levels);
 
+$fails = 0;
 while(true) {
     
     $direction = 1;
@@ -64,14 +68,7 @@ while(true) {
     @filepath = split(/\//, $currenturl);
     $filename = $filepath[$#filepath];
     
-    if(!$dry_run) {
-        system("wget ".$currenturl);
-        if(!exists $levels[0]->{cend} && !(-e $filename)) {
-            exit;
-        }
-    }
-    
-    $movecommand = "mv '".$filename."' ".$download_dir.$file_prefix;
+    $movecommand = $download_dir.$file_prefix;
     @extpieces = split(/\./,$filename);
     $has_extension = $#extpieces > 0 ? 1 : 0;
     for($j=0; $j < $#levels + $has_extension; $j++) {
@@ -79,14 +76,24 @@ while(true) {
         if($j < $#levels) { $movecommand .= $placeholder_delimiter; }
     }
     if($has_extension) {
-        $filename = '.'.$extpieces[$#extpieces];
+        $filename2 = '.'.$extpieces[$#extpieces];
     } else {
-        $filename =~ s/[^_A-Z\d\.]/-/ig;
+        $filename2 =~ s/[^_A-Z\d\.]/-/ig;
     }
-    $movecommand .= $filename.$fileextension;
-    if(!$dry_run) {
-        system($movecommand);
+    $movecommand .= $filename2.$fileextension;
+    
+    if(!$dry_run && !(-e $movecommand)) {
+        system("wget ".$currenturl);
+        if(!exists $levels[0]->{cend} && !(-e $filename)) {
+            $fails++;
+            if($allowed_fails < $fails) { exit; }
+        } else {
+            $fails = 0;
+        }
     }
+    
+    $movecommand = "mv '".$filename."' ".$movecommand;
+    if(!$dry_run && -e $filename) { system($movecommand);  }
     
     if($dry_run) {
         print "$currenturl\n";
